@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.side {
+  width: 220px;
+  height: 100vh;
+  background-color: rgba(31, 101, 193, 0.871);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  padding: 25px 0 0 25px;
+}
+.logo img {
+  width: 60px;
+  clip-path: circle(20px at 50% 54%);
+}
+.side nav {
+  width: 100%;
+}
+.mennu {
+  list-style: none;
+  line-height: 2.3;
+}
+.mennu a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  padding-left: 25px;
+}
+.mennu li{
+  position: relative;
+}
+.mennu li:hover {
+  background-color: rgb(19, 24, 179);
+}
+.mc2{
+    max-height:0;
+    overflow: hidden;
+     background-color: rgba(31, 101, 193, 0.871);
+    transition: max-height 0.3s ease-out;
+}
+li:hover .mc2{
+    max-height: 150px;
+}

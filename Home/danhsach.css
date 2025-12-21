@@ -1,0 +1,217 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.body_1 {
+  display: flex;
+}
+/*layout tổng---------------------------------------------------------*/
+.listNS {
+  padding: 0 30px 0;
+  width: 100%;
+  overflow: auto;
+}
+/*bảng điền thông tin thêm nhân viên-----------------------------------*/
+.listNS h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px 0 20px;
+}
+#new {
+  overflow: hidden;
+  background-color: rgba(10, 0, 185, 0.867);
+  font-size: 20px;
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 20px;
+}
+.newNS {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  width: 100%;
+  padding: 10px;
+  line-height: 1.7;
+  font-size: 25px;
+  max-width: 900px;
+}
+input[type="text"] {
+  width: 100%;
+  font-size: 20px;
+  padding: 2.5px;
+  border-color: rgba(0, 0, 0, 0.304);
+}
+#save {
+  overflow: hidden;
+  background-color: rgba(10, 0, 185, 0.867);
+  font-size: 20px;
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+#cancel {
+  overflow: hidden;
+  background-color: rgba(10, 0, 185, 0.867);
+  font-size: 20px;
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+#new:active,
+#save:active,
+#cancel:active {
+  background-color: rgb(4, 4, 136);
+}
+/*danh sách nhân viên--------------------------------------------------*/
+.Search{
+  display: flex;
+  margin-top: 20px;
+}
+#search__btn{
+  width: 100px;
+  background-color: #f1f3f4;
+  border: 1px solid rgba(0, 0, 0, 0.174);
+}
+#search__btn:active{
+  background-color: rgba(0, 0, 0, 0.189);
+}
+#tt {
+  background-color: rgba(80, 154, 251, 0.871);
+}
+#table {
+  margin-top: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.156);
+  border-collapse: collapse;
+  width: 100%;
+}
+.table th {
+  padding: 15px;
+}
+#list td {
+  text-align: center;
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.156);
+}
+.Delete-btn {
+  background-color: rgb(241, 52, 52);
+  border: 0;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 6px;
+  margin-left: 5px;
+}
+.action {
+  display: flex;
+  justify-content: center;
+}
+.table {
+  overflow: auto;
+  max-width: 900px;
+  min-width: 800px;
+}
+/*Modal-hộp thoại chung-------------------------------------------------*/
+.my_modal {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.342);
+}
+/*Modal-hộp thoại thông báo: xóa---------------------------------------*/
+.modal_alert_delete {
+  position: relative;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 300px;
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: linear-gradient(90deg, white, rgb(241, 235, 235));
+  box-shadow: 10px 0 50px;
+}
+.modal_alert_delete p {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.modal_alert_delete .confirm {
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+.modal_alert_delete button:active {
+  background-color: rgba(0, 0, 0, 0.174);
+}
+/*modal fix------------------------------------------------------------*/
+.modal__fix {
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  background-image: linear-gradient(90deg, white, rgb(241, 235, 235));
+  box-shadow: 10px 0 50px;
+}
+.modal__fix h2 {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.table__fix {
+  font-size: 25px;
+  width: 100%;
+  line-height: 1.7;
+}
+#update {
+  overflow: hidden;
+  background-color: rgba(10, 0, 185, 0.867);
+  font-size: 20px;
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+#update:active {
+  background-color: rgb(4, 4, 136);
+}
+.close__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  font-size: 25px;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  border: none;
+  border-top-right-radius: 5px;
+  background: transparent;
+}
+.close__btn:hover {
+  background-color: red;
+  color: white;
+}
+.close__btn:active {
+  background-color: rgba(110, 0, 0, 0.634);
+  color: white;
+}
+/*các class dùng chung-------------------------------------------------*/
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
+}

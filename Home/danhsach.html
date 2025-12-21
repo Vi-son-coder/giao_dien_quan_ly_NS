@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="danhsach.css" />
+    <title>Danh sách nhân viên</title>
+  </head>
+  <body>
+    <!--bảng nhân sự-->
+    <div class="body_1">
+      <aside class="side">
+        <div class="logo">
+          <img src="./logo-dai-hoc-cong-nghiep-ha-noi-5.webp" alt="" />
+          <h2>HAUI</h2>
+        </div>
+        <nav>
+          <ul class="mennu">
+            <li><a href="#">Trang chủ</a></li>
+            <li>
+              <a>Quản lý nhân viên</a>
+              <ul class="mc2">
+                <li><a href="#">Danh sách nhân viên</a></li>
+                <li><a href="#">Hồ sơ nhân viên</a></li>
+                <li><a href="#">Lưu nhân viên nghỉ</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Quản lý phòng ban</a></li>
+            <li>
+              <a href="#">Nghỉ phép</a>
+              <ul class="mc2">
+                <li><a href="#">Tạo yêu cầu nghỉ phép</a></li>
+                <li><a href="#">Lịch sử nghỉ phép</a></li>
+                <li><a href="#">Quản lý yêu cầu nghỉ phép</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Chấm công</a></li>
+            <li><a href="#">Hợp đồng</a></li>
+            <li><a href="#">Hồ sơ cá nhân</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <div class="listNS">
+        <!--Bảng điền thông tin thêm nhân viên-->
+        <div>
+          <h1>Danh sách nhân viên</h1>
+          <button type="button" class="btn" id="new" onclick="themns()">
+            Thêm NV
+          </button>
+          <form id="form__newNV" class="form__newNV hidden">
+            <table id="themns" class="newNS">
+              <tr>
+                <td>Mã NV</td>
+                <td>
+                  <input
+                    type="text"
+                    id="manv"
+                    placeholder="Nhập mã nhân viên"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Họ tên</td>
+                <td><input type="text" id="ht" placeholder="Nhập họ tên" /></td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td><input type="text" id="e" placeholder="Nhập Email" /></td>
+              </tr>
+              <tr>
+                <td>Chức vụ</td>
+                <td>
+                  <input type="text" id="cv" placeholder="Nhập chức vụ" />
+                </td>
+              </tr>
+              <tr>
+                <td>Phòng ban</td>
+                <td>
+                  <input
+                    type="text"
+                    id="departments"
+                    placeholder="Nhập phòng ban"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Số điện thoại</td>
+                <td>
+                  <input
+                    type="text"
+                    id="phone__number"
+                    placeholder="Nhập số điện thoại"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Địa chỉ</td>
+                <td>
+                  <input type="text" id="address" placeholder="Nhập địa chỉ" />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align: center">
+                  <button class="btn" id="cancel" type="button">Hủy</button>
+                  <button id="save" class="btn" type="submit">Lưu</button>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <!--danh sách nhân viên-->
+        <div class="table">
+          <div class="Search">
+            <input
+              type="text"
+              id="search"
+              placeholder="Nhập mã nhân viên hoặc tên"
+            />
+            <button id="search__btn" type="button">Tìm kiếm</button>
+          </div>
+          <table id="table">
+            <tr id="tt">
+              <th>Mã NV</th>
+              <th>Họ tên</th>
+              <th>Email</th>
+              <th>Hành động</th>
+            </tr>
+            <tbody id="list"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--modal alert delete-->
+    <div class="my_modal hidden" id="alert_delete">
+      <div class="modal_alert_delete">
+        <p>Bạn có xác nhận xóa không?</p>
+        <button type="button" class="confirm" id="Delete">Xác nhận</button>
+        <button type="button" class="close__btn" onclick="close__delete__btn()">
+          &times;
+        </button>
+      </div>
+    </div>
+    <!--modal fix-->
+    <div class="my_modal hidden" id="modal__fix">
+      <form id="form__fix">
+        <div class="modal__fix">
+          <h2>Sửa nhân viên</h2>
+          <table class="table__fix">
+            <tr>
+              <td>Mã NV</td>
+              <td><input type="text" id="manvFix" /></td>
+            </tr>
+            <tr>
+              <td>Họ tên</td>
+              <td><input type="text" id="htFix" /></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" id="eFix" /></td>
+            </tr>
+            <tr>
+              <td>Chức vụ</td>
+              <td><input type="text" id="cvFix" /></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: center; padding-top: 20px">
+                <button type="submit" id="update">Cập nhật</button>
+              </td>
+            </tr>
+          </table>
+          <button type="button" class="close__btn" onclick="close__fix__btn()">
+            &times;
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="./danhsach.js" defer></script>
+  </body>
+</html>
