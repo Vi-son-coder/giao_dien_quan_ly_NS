@@ -39,9 +39,15 @@
             </label>
             <a href="#" class="forgot">Quên mật khẩu?</a>
           </div>
-          <div class="button"><button>Đăng nhập</button></div>
+          <div class="button"><button id="DN" type="button">Đăng nhập</button></div>
         </form>
       </section>
     </div>
+    <script>
+      document.getElementById("DN").addEventListener("click",DN);
+      function DN(){
+        window.location.href = "../Home/home.html"
+      }
+    </script>
   </body>
 </html>

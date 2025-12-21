@@ -15,6 +15,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 20px 0 20px;
 }
+input[type="text"] {
+  width: 100%;
+  font-size: 20px;
+  padding: 2.5px;
+  border-color: rgba(0, 0, 0, 0.304);
+}
+.Search{
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+}
+#search__btn{
+  width: 100px;
+  background-color: #f1f3f4;
+  border: 1px solid rgba(0, 0, 0, 0.174);
+}
+#search__btn:active{
+  background-color: rgba(0, 0, 0, 0.189);
+}
 #tt {
   background-color: rgba(80, 154, 251, 0.871);
 }
@@ -26,6 +45,28 @@ body {
 }
 .table th {
   padding: 15px;
+}
+#Fix__btn {
+  background-color: rgb(242, 234, 16);
+  border: 0;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 6px;
+  margin-left: 5px;
+}
+#Fix__btn:active{
+background-color: rgba(242, 234, 16, 0.459);
+}
+#Xem{
+  background-color: rgb(16, 197, 242);
+  border: 0;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 6px;
+}
+#Xem:active{
+    background-color: rgba(16, 197, 242, 0.181);
+
 }
 #list td {
   text-align: center;
@@ -60,31 +101,4 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.342);
-}
-/*Modal-hộp thoại thông báo: xóa---------------------------------------*/
-.modal_alert_delete {
-  position: relative;
-  display: flex;
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 300px;
-  height: 150px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-image: linear-gradient(90deg, white, rgb(241, 235, 235));
-  box-shadow: 10px 0 50px;
-}
-.modal_alert_delete p {
-  margin-bottom: 40px;
-  margin-top: 40px;
-}
-.modal_alert_delete .confirm {
-  font-size: 15px;
-  padding: 2px;
-  border-radius: 4px;
-  border: 1px solid black;
-}
-.modal_alert_delete button:active {
-  background-color: rgba(0, 0, 0, 0.174);
 }

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../Home/sidebar.css">
-  <link rel="stylesheet" href="hosonv.css">
-  <title>Hồ sơ nhân viên</title>
-</head>
-<body>
-  <aside class="side">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Home/sidebar.css" />
+    <link rel="stylesheet" href="hosonv.css" />
+    <title>Hồ sơ nhân viên</title>
+  </head>
+  <body>
+    <aside class="side">
       <div class="logo">
         <img src="../Home/logo-dai-hoc-cong-nghiep-ha-noi-5.webp" alt="" />
         <h2>HAUI</h2>
       </div>
       <nav>
         <ul class="mennu">
-          <li><a href="#">Trang chủ</a></li>
+          <li><a href="../Home/home.html">Trang chủ</a></li>
           <li>
             <a>Quản lý nhân viên</a>
             <ul class="mc2">
-              <li><a href="#">Danh sách nhân viên</a></li>
+              <li><a href="../Home/danhsach.html">Danh sách nhân viên</a></li>
               <li><a href="#">Hồ sơ nhân viên</a></li>
               <li><a href="#">Lưu nhân viên nghỉ</a></li>
             </ul>
@@ -42,16 +42,25 @@
     <div class="form__hsnv">
       <h1>Hồ sơ nhân viên</h1>
       <div class="table">
-            <table id="table">
-              <tr id="tt">
-                <th>Mã NV</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Hành động</th>
-              </tr>
-              <tbody id="list"></tbody>
-            </table>
-          </div>
+        <div class="Search">
+          <input
+            type="text"
+            id="search"
+            placeholder="Nhập mã nhân viên hoặc tên"
+          />
+          <button id="search__btn" type="button">Tìm kiếm</button>
+        </div>
+        <table id="table">
+          <tr id="tt">
+            <th>Mã NV</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Hành động</th>
+          </tr>
+          <tbody id="list"></tbody>
+        </table>
+      </div>
     </div>
-</body>
+    <script src="hosonv.js" defer></script>
+  </body>
 </html>
