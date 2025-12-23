@@ -41,6 +41,8 @@ input[type="text"] {
   font-size: 20px;
   padding: 2.5px;
   border-color: rgba(0, 0, 0, 0.304);
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 #save {
   overflow: hidden;
@@ -75,6 +77,9 @@ input[type="text"] {
   background-color: #f1f3f4;
   border: 1px solid rgba(0, 0, 0, 0.174);
 }
+#search__btn:hover{
+  cursor: pointer;
+}
 #search__btn:active {
   background-color: rgba(0, 0, 0, 0.189);
 }
@@ -103,6 +108,12 @@ input[type="text"] {
   border-radius: 3px;
   font-size: 20px;
   padding: 6px;
+}
+.Delete-btn:hover{
+  cursor: pointer;
+}
+.Delete-btn:active{
+  background-color:rgba(241, 52, 52, 0.26) ;
 }
 .action {
   display: flex;
@@ -138,6 +149,7 @@ input[type="text"] {
   flex-direction: column;
   background-image: linear-gradient(90deg, white, rgb(241, 235, 235));
   box-shadow: 10px 0 50px;
+  animation: hien 0.3s ease;
 }
 .modal_alert_delete p {
   margin-bottom: 40px;
@@ -149,43 +161,21 @@ input[type="text"] {
   border-radius: 4px;
   border: 1px solid black;
 }
-.modal_alert_delete button:active {
+.modal_alert_delete .confirm:hover{
+  cursor: pointer;
+}
+.modal_alert_delete .confirm:active {
   background-color: rgba(0, 0, 0, 0.174);
 }
-/*modal fix------------------------------------------------------------*/
-.modal__fix {
-  position: relative;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid black;
-  width: 500px;
-  padding: 20px;
-  border-radius: 5px;
-  background-image: linear-gradient(90deg, white, rgb(241, 235, 235));
-  box-shadow: 10px 0 50px;
-}
-.modal__fix h2 {
-  font-size: 30px;
-  font-family: Arial, Helvetica, sans-serif;
-  padding-bottom: 10px;
-  text-align: center;
-}
-.table__fix {
-  font-size: 25px;
-  width: 100%;
-  line-height: 1.7;
-}
-#update {
-  overflow: hidden;
-  background-color: rgba(10, 0, 185, 0.867);
-  font-size: 20px;
-  border: 0;
-  padding: 5px 15px;
-  border-radius: 5px;
-  color: white;
-}
-#update:active {
-  background-color: rgb(4, 4, 136);
+@keyframes hien{
+  from{
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to{
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 .close__btn {
   display: flex;
@@ -204,6 +194,7 @@ input[type="text"] {
 .close__btn:hover {
   background-color: red;
   color: white;
+  cursor: pointer;
 }
 .close__btn:active {
   background-color: rgba(110, 0, 0, 0.634);

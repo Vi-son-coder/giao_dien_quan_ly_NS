@@ -20,6 +20,8 @@ input[type="text"] {
   font-size: 20px;
   padding: 2.5px;
   border-color: rgba(0, 0, 0, 0.304);
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 .Search{
   display: flex;
@@ -30,6 +32,9 @@ input[type="text"] {
   width: 100px;
   background-color: #f1f3f4;
   border: 1px solid rgba(0, 0, 0, 0.174);
+}
+#search__btn:hover{
+  cursor: pointer;
 }
 #search__btn:active{
   background-color: rgba(0, 0, 0, 0.189);
@@ -54,6 +59,9 @@ input[type="text"] {
   font-size: 20px;
   padding: 6px;
 }
+#Fix__btn:hover{
+  cursor: pointer;
+}
 #Fix__btn:active{
 background-color: rgba(242, 234, 16, 0.459);
 }
@@ -64,6 +72,9 @@ background-color: rgba(242, 234, 16, 0.459);
   font-size: 20px;
   padding: 6px;
   margin-left: 5px;
+}
+#Xem{
+  cursor: pointer;
 }
 #Xem:active{
     background-color: rgba(16, 197, 242, 0.181);
@@ -91,11 +102,145 @@ background-color: rgba(242, 234, 16, 0.459);
 .my_modal {
   position: fixed;
   z-index: 9999;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.342);
+}
+
+/*modal fix------------------------------------------------------------*/
+.modal__fix {
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  background-image: linear-gradient(90deg, white, rgb(241, 235, 235));
+  box-shadow: 10px 0 50px;
+  animation: hien 0.3s ease;
+}
+.modal__fix h2 {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.table__fix {
+  font-size: 25px;
+  width: 100%;
+  line-height: 1.7;
+}
+#update {
+  overflow: hidden;
+  background-color: #0d6efd;
+  font-size: 20px;
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+#update:hover{
+  cursor: pointer;
+}
+#update:active {
+  background-color: rgb(4, 4, 136);
+}
+@keyframes hien{
+  from{
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.close__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  font-size: 25px;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  border: none;
+  border-top-right-radius: 5px;
+  background: transparent;
+}
+.close__btn:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+.close__btn:active {
+  background-color: rgba(110, 0, 0, 0.634);
+  color: white;
+}
+
+/*form xem hồ sơ--------------------------------------------------------*/
+ .form__viewNV {
+      background: #fff;
+      width: 420px;
+      max-width: 95%;
+      padding: 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      animation: hien 0.3s ease;
+    }
+    .form__viewNV h2 {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+    }
+    .form-group label {
+      font-size: 14px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+.form-group textarea {
+  padding: 2.5px;
+  font-size: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.199);
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+.form-group input[readonly],
+.form-group textarea[readonly] {
+  cursor: not-allowed;
+  resize: none;
+}
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.form-actions button {
+  padding: 8px 24px;
+  border: none;
+  background: #444;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form-actions button:hover {
+  background: #000;
+}
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
 }

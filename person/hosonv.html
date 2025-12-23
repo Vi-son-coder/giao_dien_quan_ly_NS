@@ -67,6 +67,98 @@
         </table>
       </div>
     </div>
+    <!--modal fix-->
+    <div class="my_modal hidden" id="modal__fix">
+      <form id="form__fix">
+        <div class="modal__fix">
+          <h2>Sửa thông tin nhân viên</h2>
+          <table class="table__fix">
+            <tr>
+              <td>Mã NV</td>
+              <td><input type="text" id="manvFix" /></td>
+            </tr>
+            <tr>
+              <td>Họ tên</td>
+              <td><input type="text" id="htFix" /></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" id="eFix" /></td>
+            </tr>
+            <tr>
+              <td>Chức vụ</td>
+              <td><input type="text" id="cvFix" /></td>
+            </tr>
+            <tr>
+              <td>Phòng ban</td>
+              <td><input type="text" id="departmentsFix"></td>
+            </tr>
+            <tr>
+              <td>Số điện thoại</td>
+              <td><input type="text" id="phone__numberFix"></td>
+            </tr>
+            <tr>
+              <td>Địa chỉ</td>
+              <td><input type="text" id="addressFix"></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: center; padding-top: 20px">
+                <button type="submit" id="update">Cập nhật</button>
+              </td>
+            </tr>
+          </table>
+          <button type="button" class="close__btn" onclick="close__fix__btn()">
+            &times;
+          </button>
+        </div>
+      </form>
+    </div>
+    <!--modal view-->
+    <div id="modal__view" class="my_modal hidden">
+    <form class="form__viewNV">
+    <h2>Hồ sơ nhân viên</h2>
+
+    <div class="form-group">
+      <label>Mã nhân viên</label>
+      <input type="text" id="view_manv" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Họ tên</label>
+      <input type="text" id="view_username" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" id="view_email" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Chức vụ</label>
+      <input type="text" id="view_cv" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Phòng ban</label>
+      <input type="text" id="view_departments" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Số điện thoại</label>
+      <input type="text" id="view_phone" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Địa chỉ</label>
+      <textarea id="view_address" rows="3" readonly></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" onclick="close__view()">Đóng</button>
+    </div>
+  </form>
+</div>
+    
     <script src="hosonv.js" defer></script>
   </body>
 </html>
