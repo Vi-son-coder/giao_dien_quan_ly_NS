@@ -37,11 +37,12 @@ input[type="text"] {
 #tt {
   background-color: rgba(80, 154, 251, 0.871);
 }
-#table {
+#table{
   margin-top: 20px;
   border: 1px solid rgba(0, 0, 0, 0.156);
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed; /*quy định cách trình duyệt tính độ rộng các cột, là bảng tính kích thước theo width đã khai báo, KHÔNG theo nội dung bên trong.*/
 }
 .table th {
   padding: 15px;
@@ -52,7 +53,6 @@ input[type="text"] {
   border-radius: 3px;
   font-size: 20px;
   padding: 6px;
-  margin-left: 5px;
 }
 #Fix__btn:active{
 background-color: rgba(242, 234, 16, 0.459);
@@ -63,31 +63,28 @@ background-color: rgba(242, 234, 16, 0.459);
   border-radius: 3px;
   font-size: 20px;
   padding: 6px;
+  margin-left: 5px;
 }
 #Xem:active{
     background-color: rgba(16, 197, 242, 0.181);
-
 }
 #list td {
   text-align: center;
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.156);
+  overflow-wrap: break-word;
 }
-.Delete-btn {
-  background-color: rgb(241, 52, 52);
-  border: 0;
-  border-radius: 3px;
-  font-size: 20px;
-  padding: 6px;
-  margin-left: 5px;
+#col__action{
+  width: calc(132.2px + 116.5px + 30px + 6px);
 }
-.action {
+#action {
   display: flex;
   justify-content: center;
+  gap: 0;
 }
 .table {
   overflow: auto;
-  max-width: 900px;
+  max-width: 1000px;
   min-width: 800px;
 }
 /*Modal-hộp thoại chung-------------------------------------------------*/

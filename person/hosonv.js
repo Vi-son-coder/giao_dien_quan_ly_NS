@@ -1,6 +1,5 @@
-console.log("js đã chạy");
 let employees = JSON.parse(localStorage.getItem("employees")) || [];
-console.log(employees);
+
 let Form__hsnv = document.querySelector(".form__hsnv");
 
 let userList = Form__hsnv.querySelector("#list");
@@ -29,6 +28,24 @@ function display(Data = employees) {
     });
   });
 }
+
 window.addEventListener("load", () => {
   display(employees);
 });
+
+function Search() {
+  let keyword = Form__hsnv.querySelector("#search").value.toLowerCase().trim();
+
+  if (keyword == "") {
+    display(employees);
+  } else {
+    const result = employees.filter(
+      (user) =>
+        user.manv.toLowerCase().includes(keyword) ||
+        user.username.toLowerCase().includes(keyword)
+    );
+    display(result);
+  }
+}
+
+Form__hsnv.querySelector("#search").addEventListener("input", Search);

@@ -46,7 +46,7 @@ function display(Data = employees) {
 const seachInput = document.getElementById("search");
   
 function TimKiem(){
-    const keyword = seachInput.value.toLowerCase();
+    const keyword = seachInput.value.toLowerCase().trim();
     if(keyword == ""){
       display(employees);
       return;
