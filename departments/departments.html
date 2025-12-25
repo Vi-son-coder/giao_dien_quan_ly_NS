@@ -42,8 +42,10 @@
       <h1>Danh sách phòng ban</h1>
 
       <div class="actions">
-        <button type="button" class="btn add" id="add__btn">+ Thêm phòng ban</button>
-        <input type="text" placeholder="Tìm phòng ban..." id="search"/>
+        <button type="button" class="btn add" id="add__btn">
+          + Thêm phòng ban
+        </button>
+        <input type="text" placeholder="Tìm phòng ban..." id="search" />
       </div>
 
       <table>
@@ -67,9 +69,11 @@
       </table>
     </div>
     <div class="my_modal hidden" id="modal__add">
-      <form class="formAdd__departments" id="form__departments">
+      <form class="form__departments" id="form__departments">
         <h2>Thêm phòng ban</h2>
-        <button type="button" class="close__btn" onclick="close__add__btn()">&times;</button>
+        <button type="button" class="close__btn" onclick="close__add__btn()">
+          &times;
+        </button>
         <table>
           <tr>
             <td>Mã phòng ban</td>
@@ -106,6 +110,40 @@
           &times;
         </button>
       </div>
+    </div>
+    <!---modal fix-->
+    <div class="my_modal hidden" id="modal__fix">
+      <form class="formFix__departments" id="form__departmentsFix">
+        <h2>Thêm phòng ban</h2>
+        <button type="button" class="close__btn" onclick="close__fix__btn()">
+          &times;
+        </button>
+        <table>
+          <tr>
+            <td>Mã phòng ban</td>
+            <td>
+              <input
+                type="text"
+                id="code__departments__Fix"
+                placeholder="Nhập mã phòng ban"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Tên phòng ban</td>
+            <td>
+              <input
+                type="text"
+                id="nameDepartments__Fix"
+                placeholder="Nhập tên phòng ban"
+              />
+            </td>
+          </tr>
+        </table>
+        <div class="block__btn">
+          <button type="submit" id="update__btn">Cập nhật</button>
+        </div>
+      </form>
     </div>
     <script src="department.js" defer></script>
   </body>

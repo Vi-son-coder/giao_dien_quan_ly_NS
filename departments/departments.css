@@ -95,7 +95,7 @@ body {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.342);
 }
-.formAdd__departments {
+.formAdd__departments,.formFix__departments {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,12 +107,12 @@ body {
   padding: 30px;
   animation: hien 0.3s ease;
 }
-.formAdd__departments h2 {
+.formAdd__departments h2,.formFix__departments h2 {
   margin-bottom: 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
 }
-.formAdd__departments table {
+.formAdd__departments table, .formFix__departments table {
   font-size: 25px;
   line-height: 2.6;
   margin-bottom: 30px;
@@ -124,7 +124,7 @@ input[type="text"] {
   border-radius: 5px;
   background-color: #f9f9f9;
 }
-#save__btn {
+#save__btn,#update__btn {
   overflow: hidden;
   background-color: #0d6efd;
   font-size: 20px;
@@ -132,11 +132,9 @@ input[type="text"] {
   padding: 5px 15px;
   border-radius: 5px;
   color: white;
-}
-#save__btn:hover {
   cursor: pointer;
 }
-#save__btn:active {
+#save__btn:active,#update__btn:active {
   background-color: rgb(4, 4, 136);
 }
 .close__btn {

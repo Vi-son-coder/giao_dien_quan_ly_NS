@@ -85,14 +85,16 @@ function close__Add__btn() {
 
 function AddUserInDepart(e) {
   let index = rememberRow__Add.dataset.index;
-  let isExist = department.employees.find(user => user.manv == employees[index].manv);
-    if (isExist){
-      alert("Nhân viên đã được thêm");
-      return;
-    } else {
-      department.employees.push(employees[index]);
-    }
- 
+  let isExist = department.employees.find(
+    (user) => user.manv == employees[index].manv
+  );
+  if (isExist) {
+    alert("Nhân viên đã được thêm");
+    return;
+  } else {
+    department.employees.push(employees[index]);
+  }
+
   localStorage.setItem("departments", JSON.stringify(Departments));
   display(department.employees);
 }
@@ -100,21 +102,22 @@ window.addEventListener("load", () => {
   display(department.employees);
 });
 
-function TimKiem(){
-    const keyword = document.getElementById("search").value.toLowerCase().trim();
-    if(keyword == ""){
-      display(department.employees);
-      return;
-    }
-    else{
-      const result = department.employees.filter(user => 
-      user.manv.toLowerCase().includes(keyword) || user.username.toLowerCase().includes(keyword) //sử dụng hàm includes(): để tìm chuỗi con trong chuỗi cha
+function TimKiem() {
+  const keyword = document.getElementById("search").value.toLowerCase().trim();
+  if (keyword == "") {
+    display(department.employees);
+    return;
+  } else {
+    const result = department.employees.filter(
+      (user) =>
+        user.manv.toLowerCase().includes(keyword) ||
+        user.username.toLowerCase().includes(keyword) //sử dụng hàm includes(): để tìm chuỗi con trong chuỗi cha
     );
     display(result);
-    }
+  }
 }
-document.getElementById("search").addEventListener("input",TimKiem);
-document.getElementById("search__btn").addEventListener("click",TimKiem);
+document.getElementById("search").addEventListener("input", TimKiem);
+document.getElementById("search__btn").addEventListener("click", TimKiem);
 
 // bảng thông báo xác nhận xóa-------------------------------------------
 function alert_delete() {
@@ -126,10 +129,10 @@ function alert_delete() {
 function Delete() {
   const index = rememberRow.dataset.index; //section(khối/phần của bảng như là "thead"...): là vị trí index của tr chỉ đếm trong section chứa nó
   //rowIndex: đếm toàn bộ table
-  employees.splice(index, 1);
-  localStorage.setItem("employees", JSON.stringify(employees));
+  department.employees.splice(index, 1);
+  localStorage.setItem("departments", JSON.stringify(Departments));
   rememberRow = null;
-  display(employees);
+  display(department.employees);
   document.getElementById("alert_delete").classList.add("hidden");
   document.getElementById("alert_delete").classList.remove("flex");
 }

@@ -57,14 +57,15 @@ function display(Data = Departments) {
     tr.querySelector(".btn.view").addEventListener("click", () => {
       rememberRow = tr;
       let maDepart = user.maDepart;
-      window.location.href = `employeesDPM.html?maDepart=${maDepart}`; //Tạo 1 liên kết chứa dữ liệu
+      window.location.href = `employeesDPM.html?maDepart=${maDepart}`; //Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
     });
     tr.querySelector(".btn.edit").addEventListener("click", () => {
       rememberRow = tr;
+      fix__modal(this);
     });
     tr.querySelector(".btn.delete").addEventListener("click", () => {
       rememberRow = tr;
-      alert_delete();
+      alert_delete(this);
     });
   });
 }
@@ -88,7 +89,7 @@ function Search() {
   }
 }
 
-document.querySelector(".actions input").addEventListener("input",Search);
+document.querySelector(".actions input").addEventListener("input", Search);
 
 window.addEventListener("load", () => {
   display(Departments);
@@ -117,3 +118,35 @@ function close__delete__btn() {
   document.getElementById("alert_delete").classList.add("hidden");
   document.getElementById("alert_delete").classList.remove("flex");
 }
+
+function fix__modal() {
+  document.getElementById("modal__fix").classList.remove("hidden");
+  document.getElementById("modal__fix").classList.add("flex");
+  let index = rememberRow.dataset.index;
+  document.getElementById("code__departments__Fix").value =
+    Departments[index].maDepart;
+  document.getElementById("nameDepartments__Fix").value =
+    Departments[index].nameDepart;
+}
+function Fix__Departments(e) {
+  let index = rememberRow.dataset.index;
+  e.preventDefault();
+  let maDepartFix = document.getElementById("code__departments__Fix").value;
+  let nameDepartFix = document.getElementById("nameDepartments__Fix").value;
+  if (maDepartFix == "" || nameDepartFix == "") {
+    alert("Vui lòng nhập thông tin");
+  } else {
+    Departments[index].maDepart = maDepartFix;
+    Departments[index].nameDepart = nameDepartFix;
+    localStorage.setItem("departments", JSON.stringify(Departments));
+    rememberRow = null;
+    document.getElementById("modal__fix").classList.add("hidden");
+    document.getElementById("modal__fix").classList.remove("flex");
+    display(Departments);
+  }
+}
+function close__fix__btn() {
+  document.getElementById("modal__fix").classList.add("hidden");
+  document.getElementById("modal__fix").classList.remove("flex");
+}
+document.getElementById("form__departmentsFix").addEventListener("submit",Fix__Departments);
