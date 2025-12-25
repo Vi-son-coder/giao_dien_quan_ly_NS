@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Danh sách phòng ban</title>
+    <link rel="stylesheet" href="../Home/sidebar.css" />
+    <link rel="stylesheet" href="departments.css" />
+  </head>
+  <body>
+    <aside class="side">
+      <div class="logo">
+        <img src="../Home/logo-dai-hoc-cong-nghiep-ha-noi-5.webp" />
+        <h2>HAUI</h2>
+      </div>
+      <nav>
+        <ul class="mennu">
+          <li><a href="../Home/home.html">Trang chủ</a></li>
+          <li>
+            <a>Quản lý nhân viên</a>
+            <ul class="mc2">
+              <li><a href="../Home/danhsach.html">Danh sách nhân viên</a></li>
+              <li><a href="../person/hosonv.html">Hồ sơ nhân viên</a></li>
+              <li><a href="#">Lưu nhân viên nghỉ</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Quản lý phòng ban</a></li>
+          <li>
+            <a href="#">Nghỉ phép</a>
+            <ul class="mc2">
+              <li><a href="#">Tạo yêu cầu nghỉ phép</a></li>
+              <li><a href="#">Lịch sử nghỉ phép</a></li>
+              <li><a href="#">Quản lý yêu cầu nghỉ phép</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Chấm công</a></li>
+          <li><a href="#">Hợp đồng</a></li>
+          <li><a href="#">Hồ sơ cá nhân</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="container">
+      <h1>Danh sách phòng ban</h1>
+
+      <div class="actions">
+        <button type="button" class="btn add" id="add__btn">+ Thêm phòng ban</button>
+        <input type="text" placeholder="Tìm phòng ban..." id="search"/>
+      </div>
+
+      <table>
+        <colgroup>
+          <col />
+          <col />
+          <col />
+          <col />
+          <col style="width: 179px" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã phòng ban</th>
+            <th>Tên phòng ban</th>
+            <th>Số nhân viên</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+    <div class="my_modal hidden" id="modal__add">
+      <form class="formAdd__departments" id="form__departments">
+        <h2>Thêm phòng ban</h2>
+        <button type="button" class="close__btn" onclick="close__add__btn()">&times;</button>
+        <table>
+          <tr>
+            <td>Mã phòng ban</td>
+            <td>
+              <input
+                type="text"
+                id="code__departments"
+                placeholder="Nhập mã phòng ban"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Tên phòng ban</td>
+            <td>
+              <input
+                type="text"
+                id="nameDepartments"
+                placeholder="Nhập tên phòng ban"
+              />
+            </td>
+          </tr>
+        </table>
+        <div class="block__btn">
+          <button type="submit" id="save__btn">Lưu</button>
+        </div>
+      </form>
+    </div>
+    <!--modal alert delete-->
+    <div class="my_modal hidden" id="alert_delete">
+      <div class="modal_alert_delete">
+        <p>Bạn có xác nhận xóa không?</p>
+        <button type="button" class="confirm" id="Delete">Xác nhận</button>
+        <button type="button" class="close__btn" onclick="close__delete__btn()">
+          &times;
+        </button>
+      </div>
+    </div>
+    <script src="department.js" defer></script>
+  </body>
+</html>

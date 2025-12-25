@@ -3,21 +3,40 @@
   margin: 0;
   box-sizing: border-box;
 }
-.body_1 {
+body {
   display: flex;
 }
-/*layout tổng----------------------------------------------------------*/
-.listNS {
+.table {
   padding: 0 30px 0;
-  width: 100%;
   overflow: auto;
+  max-width: 1000px;
+  min-width: 800px;
 }
 /*bảng điền thông tin thêm nhân viên-----------------------------------*/
-.listNS h1 {
+.table h1 {
   font-family: Arial, Helvetica, sans-serif;
   padding: 20px 0 20px;
 }
-#new {
+#action {
+  width: 100%;
+  display: flex;
+}
+#close {
+  overflow: hidden;
+  background-color: red;
+  font-size: 20px;
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
+#close:active {
+  background-color: rgb(132, 2, 2);
+}
+#new, .Add__btn {
   overflow: hidden;
   background-color: #2ecc71;
   font-size: 20px;
@@ -27,20 +46,11 @@
   color: white;
   margin-bottom: 20px;
 }
-#new:hover{
+#new:hover,.Add__btn {
   cursor: pointer;
 }
-#new:active{
+#new:active,.Add__btn:active {
   background-color: #3d8b5dc4;
-}
-.newNS {
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.185);
-  width: 100%;
-  padding: 10px;
-  line-height: 1.7;
-  font-size: 25px;
-  max-width: 900px;
 }
 input[type="text"] {
   width: 100%;
@@ -49,28 +59,6 @@ input[type="text"] {
   border-color: rgba(0, 0, 0, 0.304);
   border-radius: 5px;
   background-color: #f9f9f9;
-}
-#save {
-  overflow: hidden;
-  background-color: rgba(10, 0, 185, 0.867);
-  font-size: 20px;
-  border: 0;
-  padding: 5px 15px;
-  border-radius: 5px;
-  color: white;
-}
-#cancel {
-  overflow: hidden;
-  background-color: rgba(10, 0, 185, 0.867);
-  font-size: 20px;
-  border: 0;
-  padding: 5px 15px;
-  border-radius: 5px;
-  color: white;
-}
-#save:active,
-#cancel:active {
-  background-color: rgb(4, 4, 136);
 }
 /*danh sách nhân viên--------------------------------------------------*/
 .Search {
@@ -82,7 +70,7 @@ input[type="text"] {
   background-color: #f1f3f4;
   border: 1px solid rgba(0, 0, 0, 0.174);
 }
-#search__btn:hover{
+#search__btn:hover {
   cursor: pointer;
 }
 #search__btn:active {
@@ -101,7 +89,7 @@ input[type="text"] {
 .table th {
   padding: 15px;
 }
-#list td {
+#list td , #listAdd td{
   text-align: center;
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.156);
@@ -115,21 +103,17 @@ input[type="text"] {
   font-size: 20px;
   padding: 6px;
 }
-.Delete-btn:hover{
+.Delete-btn:hover {
   cursor: pointer;
 }
-.Delete-btn:active{
-  background-color:rgba(241, 52, 52, 0.26) ;
+.Delete-btn:active {
+  background-color: rgba(241, 52, 52, 0.26);
 }
 .action {
   display: flex;
   justify-content: center;
 }
-.table {
-  overflow: auto;
-  max-width: 1000px;
-  min-width: 800px;
-}
+
 /*Modal-hộp thoại chung-------------------------------------------------*/
 .my_modal {
   position: fixed;
@@ -167,22 +151,13 @@ input[type="text"] {
   border-radius: 4px;
   border: 1px solid black;
 }
-.modal_alert_delete .confirm:hover{
+.modal_alert_delete .confirm:hover {
   cursor: pointer;
 }
 .modal_alert_delete .confirm:active {
   background-color: rgba(0, 0, 0, 0.174);
 }
-@keyframes hien{
-  from{
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to{
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+
 .close__btn {
   display: flex;
   justify-content: center;
@@ -212,4 +187,31 @@ input[type="text"] {
 }
 .flex {
   display: flex;
+}
+.modal__addnv{
+  position: relative;
+  width: 90%;
+  min-width: 700px;
+  max-width: 900px;
+  background-color: white;
+  height: 90vh;
+  overflow: auto;
+  border-radius: 5px;
+  animation: hien 0.3s ease;
+}
+.modal__addnv input{
+  margin-top: 30px;
+}
+.modal__addnv th{
+  padding: 15px;
+}
+@keyframes hien {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

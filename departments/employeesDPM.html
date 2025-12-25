@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="employeesDPM.css" />
+    <title>Nhân viên theo ban</title>
+  </head>
+  <body>
+    <div class="table">
+      <h1></h1>
+      <div id="action">
+        <button type="button" class="btn" id="new" onclick="themns()">
+          Thêm NV
+        </button>
+        <button type="button" class="btn" id="close">Đóng</button>
+      </div>
+      <div class="Search">
+        <input
+          type="text"
+          id="search"
+          placeholder="Nhập mã nhân viên hoặc tên"
+        />
+        <button id="search__btn" type="button">Tìm kiếm</button>
+      </div>
+      <table id="table">
+        <tr id="tt">
+          <th>Mã NV</th>
+          <th>Họ tên</th>
+          <th>Email</th>
+          <th>Hành động</th>
+        </tr>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+
+    <!--modal alert delete-->
+    <div class="my_modal hidden" id="alert_delete">
+      <div class="modal_alert_delete">
+        <p>Bạn có xác nhận xóa không?</p>
+        <button type="button" class="confirm" id="Delete">Xác nhận</button>
+        <button type="button" class="close__btn" onclick="close__delete__btn()">
+          &times;
+        </button>
+      </div>
+    </div>
+
+    <div class="my_modal hidden" id="modal__add">
+      <div class="modal__addnv">
+        <input type="text" placeholder="Tìm kiếm nhân viên"/>
+        <table id="table">
+          <tr id="tt">
+            <th>Mã NV</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Hành động</th>
+          </tr>
+          <tbody id="listAdd"></tbody>
+        </table>
+        <button type="button" class="close__btn" onclick="close__Add__btn()">
+          &times;
+        </button>
+      </div>
+    </div>
+    <script src="employeesDPM.js"></script>
+  </body>
+</html> 
