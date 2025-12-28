@@ -1,5 +1,5 @@
-let employees = JSON.parse(localStorage.getItem("employees")) || [];
-
+let account = getCurrentAccount();
+let employees = account.employees;
 let Form__hsnv = document.querySelector(".form__hsnv");
 
 let userList = Form__hsnv.querySelector("#list");
@@ -101,8 +101,8 @@ function update(e) {
     employees[index].Departments = DepartmentsFix;
     employees[index].SDT = sdtFix;
     employees[index].Address = addressFix;
-    localStorage.setItem("employees", JSON.stringify(employees));
     display(employees);
+    saveAccount(account);
     document.getElementById("modal__fix").classList.add("hidden");
     document.getElementById("modal__fix").classList.remove("flex");
   }

@@ -27,11 +27,11 @@
         <form class="loginForm">
           <div class="input-group">
             <label for="Email">Email hoặc mã nhân sự</label>
-            <input type="text" placeholder="ví dụ: nv001@gmail.com" />
+            <input type="text" id="TK" placeholder="ví dụ: nv001@gmail.com" />
           </div>
           <div class="input-group">
             <label for="password">Mật khẩu</label>
-            <input type="password" placeholder="Mật khẩu" />
+            <input type="password" id="MK" placeholder="Mật khẩu" />
           </div>
           <div class="row">
             <label for="remember">
@@ -39,15 +39,14 @@
             </label>
             <a href="#" class="forgot">Quên mật khẩu?</a>
           </div>
-          <div class="button"><button id="DN" type="button">Đăng nhập</button></div>
+          <div class="button">
+            <button id="DN" type="button">Đăng nhập</button>
+          </div>
         </form>
       </section>
     </div>
-    <script>
-      document.getElementById("DN").addEventListener("click",DN);
-      function DN(){
-        window.location.href = "../Home/home.html"
-      }
-    </script>
+    <script src="../login/auth.js"></script>
+    <script src="../login/storage.js"></script>
+    <script src="login.js" defer></script>
   </body>
 </html>

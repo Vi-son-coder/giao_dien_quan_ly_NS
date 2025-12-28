@@ -3,10 +3,15 @@ function themns() {
   document.getElementById("new").classList.add("hidden");
   document.getElementById("form__newNV").classList.remove("hidden"); //clastList: dùng để kiểm soát điều khiển các class
 }
+
+let account = getCurrentAccount();
+
+let employees = account.employees;
+
 let rememberRow = null;
 const form__newNV = document.getElementById("form__newNV"); //gọi Element form__newNV
 const userList = document.getElementById("list"); // gọi list
-let employees = JSON.parse(localStorage.getItem("employees")) || []; // lấy employees cũ hoặc tạo rỗng
+// let employees = JSON.parse(localStorage.getItem("employees")) || []; // lấy employees cũ hoặc tạo rỗng
 //JSON.parse: chuyển đổi kiểu dữ liệu từ  chuỗi sang object/bảng
 //JSON.stringify: đổi kiểu dữ liệu từ object/bảng sang chuỗi
 //localStorage: chỉ lưu dữ liệu kiểu string
@@ -61,7 +66,7 @@ function TimKiem(){
 
   seachInput.addEventListener("input",TimKiem);// khi dùng kiểu này thì chạy trên trình duyệt hàm TimKiem() sẽ được trình duyệt tự động thêm tham số event nên hàm nào mà có tham số sẵn sẽ bị lỗi
 
-  document.getElementById("search__btn").addEventListener("click",TimKiem);
+  document.getElementById("search__btn").addEventListener("click",TimKiem)
 
 function addUser(e) {
   //hàm xử lý submit để gửi dữ liệu
@@ -78,7 +83,7 @@ function addUser(e) {
     return;
   }
   employees.push({ manv, username, email, cv, Departments, SDT, Address}); //add dữ vào biến employees
-  localStorage.setItem("employees", JSON.stringify(employees));
+  saveAccount(Employees);
 
   form__newNV.reset(); //làm trống lại form nhập để nhập tiếp
   display(employees);
@@ -103,7 +108,7 @@ function Delete() {
   const index = rememberRow.dataset.index; //section(khối/phần của bảng như là "thead"...): là vị trí index của tr chỉ đếm trong section chứa nó
   //rowIndex: đếm toàn bộ table
   employees.splice(index, 1);
-  localStorage.setItem("employees", JSON.stringify(employees));
+  saveAccount(Employees);
   rememberRow = null;
   display(employees);
   document.getElementById("alert_delete").classList.add("hidden");
