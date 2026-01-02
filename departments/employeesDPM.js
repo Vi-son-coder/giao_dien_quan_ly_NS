@@ -11,7 +11,7 @@ function getEmployeesDPM() {
     (emp) => emp.idAcc === idAcc && emp.idDepart === idDepart
   );
 }
-
+// các dữ liệu dẫn xuất (derived data) không để làm biến global vd:Employees = allEmployees.filter(...)
 function getEmployees() {
   return allEmployees.filter((emp) => emp.idAcc === idAcc);
 }
