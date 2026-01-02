@@ -1,19 +1,25 @@
-const Departments = JSON.parse(localStorage.getItem("departments")) || [];
+let allEmployees = JSON.parse(localStorage.getItem("employees"));
 
-let rememberRow = null;
-
-let params = new URLSearchParams(window.location.search); //URLSearchParams: xử lý chuỗi dữ liệu sau dấu ? để lấy dữ liệu
-// window.location.search: lấy chuỗi dữ liệu nằm trên URL
 let userList__Add = document.getElementById("listAdd");
 
-const account = getCurrentAccount();
-const employees = account.employees;
-let rememberRow__Add = null;
+let idAcc = localStorage.getItem("idUser");
 
-let maDepart = params.get("maDepart");
+let idDepart = localStorage.getItem("idDepart");
 
-let department = Departments.find((d) => d.maDepart === maDepart);
-if (!department) {
+function getEmployeesDPM() {
+  return allEmployees.filter(
+    (emp) => emp.idAcc === idAcc && emp.idDepart === idDepart
+  );
+}
+
+function getEmployees() {
+  return allEmployees.filter((emp) => emp.idAcc === idAcc);
+}
+
+let allDepartments = JSON.parse(localStorage.getItem("departments"));
+
+let Departments = allDepartments.find((d) => d.idDepart === idDepart);
+if (!Departments) {
   alert("Không tìm thấy phòng ban");
 }
 
@@ -23,18 +29,18 @@ document.getElementById("close").addEventListener("click", () => {
 
 document.querySelector(
   ".table h1"
-).innerHTML = `Danh sách phòng ${department.nameDepart}`;
+).innerHTML = `Danh sách phòng ${Departments.nameDepart}`;
 
 let userList = document.getElementById("list");
 
-function display(Data = department.employees) {
+function display(EmployeesDPM) {
   userList.innerHTML = "";
-  Data.forEach((user, index) => {
+  EmployeesDPM.forEach((emp) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-        <td>${user.manv}</td>
-        <td>${user.username}</td>
-        <td>${user.email}</td>
+        <td>${emp.idEmp}</td>
+        <td>${emp.username}</td>
+        <td>${emp.email}</td>
         <td>
         <div class="action">
           <button type="button" class="Delete-btn" id="delete__btn">Xóa</button>
@@ -43,23 +49,22 @@ function display(Data = department.employees) {
         `;
     userList.appendChild(tr); //appendChild(): thêm con vào cuối của cha
     tr.querySelector("#delete__btn").addEventListener("click", function () {
-      rememberRow = tr;
-      alert_delete(this);
+      alert_delete(emp.idEmp);
     });
   });
 }
 
-function display__add(Data = employees) {
+function display__add(Employees) {
   userList__Add.innerHTML = "";
   // cú pháp element.forEach(function(element,index,array){}); là phương thức của array
-  Data.forEach((user, index) => {
+  Employees.forEach((emp) => {
     const tr = document.createElement("tr"); //createElement("tr"): phương thức tạo phần tử của DOM
-    tr.dataset.index = index; //dùng để lưu index vào tr
+    // tr.dataset.index = index; //dùng để lưu index vào tr
     //element.dataset.index: là thuộc tính(dataset: thuộc tính của DOM element, chứa thuộc tính data-*)(index là thuộc tính của dataset tương đương data-index)
     tr.innerHTML = `
-    <td>${user.manv}</td> 
-    <td>${user.username}</td>
-    <td>${user.email}</td>
+    <td>${emp.idEmp}</td> 
+    <td>${emp.username}</td>
+    <td>${emp.email}</td>
     <td>
         <div class="action">
           <button type="button" class="Add__btn">Thêm</button>
@@ -67,8 +72,7 @@ function display__add(Data = employees) {
       </td>`; // ký hiệu $: là dấu hiệu nói với JS: “chỗ này là code, không phải chữ thường”, để chiền biến/biểu thức
     userList__Add.appendChild(tr); //appendChild(): thêm con vào cuối của cha
     tr.querySelector(".Add__btn").addEventListener("click", function () {
-      rememberRow__Add = tr;
-      AddUserInDepart(this);
+      AddUserInDepart(emp.idEmp);
     });
   });
 }
@@ -76,41 +80,48 @@ function display__add(Data = employees) {
 function themns() {
   document.getElementById("modal__add").classList.remove("hidden");
   document.getElementById("modal__add").classList.add("flex");
-  display__add(employees);
+  display__add(getEmployees());
 }
 function close__Add__btn() {
   document.getElementById("modal__add").classList.add("hidden");
   document.getElementById("modal__add").classList.remove("flex");
 }
 
-function AddUserInDepart(e) {
-  let index = rememberRow__Add.dataset.index;
-  let isExist = department.employees.find(
-    (user) => user.manv == employees[index].manv
+function AddUserInDepart(idEmp) {
+  let indexDB = allEmployees.findIndex(
+    (emp) => emp.idEmp === idEmp && emp.idAcc === idAcc
+  );
+  if(indexDB == -1){
+    alert("Không tìm thấy nhân viên");
+  }
+  let isExist = getEmployees().find(
+    (emp) =>
+      emp.idEmp === idEmp &&
+      emp.idAcc === idAcc &&
+      emp.idDepart === idDepart
   );
   if (isExist) {
     alert("Nhân viên đã được thêm");
     return;
   } else {
-    department.employees.push(employees[index]);
+    allEmployees[indexDB].idDepart = idDepart;
   }
-
-  localStorage.setItem("departments", JSON.stringify(Departments));
-  display(department.employees);
+  localStorage.setItem("employees", JSON.stringify(allEmployees));
+  display(getEmployeesDPM());
 }
 window.addEventListener("load", () => {
-  display(department.employees);
+  display(getEmployeesDPM());
 });
 
 function TimKiem() {
   const keyword = document.getElementById("search").value.toLowerCase().trim();
   if (keyword == "") {
-    display(department.employees);
+    display(getEmployeesDPM());
     return;
   } else {
-    const result = department.employees.filter(
+    const result = getEmployeesDPM().filter(
       (user) =>
-        user.manv.toLowerCase().includes(keyword) ||
+        user.idEmp.toLowerCase().includes(keyword) ||
         user.username.toLowerCase().includes(keyword) //sử dụng hàm includes(): để tìm chuỗi con trong chuỗi cha
     );
     display(result);
@@ -120,19 +131,29 @@ document.getElementById("search").addEventListener("input", TimKiem);
 document.getElementById("search__btn").addEventListener("click", TimKiem);
 
 // bảng thông báo xác nhận xóa-------------------------------------------
-function alert_delete() {
+function alert_delete(idEmp) {
   // rememberRow = btn.closest("tr"); closest: là 1 method(phương thức) của DOM Element dùng để tìm phần tử cha(selector) gần nhất, cú pháp: Element.closest(selector_cha)
   document.getElementById("alert_delete").classList.remove("hidden");
   document.getElementById("alert_delete").classList.add("flex");
+  document.getElementById("alert_delete").dataset.idEmp = idEmp;
 }
 
-function Delete() {
-  const index = rememberRow.dataset.index; //section(khối/phần của bảng như là "thead"...): là vị trí index của tr chỉ đếm trong section chứa nó
+function Delete(idEmp) {
+  // const index = rememberRow.dataset.index; //section(khối/phần của bảng như là "thead"...): là vị trí index của tr chỉ đếm trong section chứa nó
   //rowIndex: đếm toàn bộ table
-  department.employees.splice(index, 1);
-  localStorage.setItem("departments", JSON.stringify(Departments));
-  rememberRow = null;
-  display(department.employees);
+  idEmp = document.getElementById("alert_delete").dataset.idEmp;
+
+  let indexDB = allEmployees.findIndex(
+    (emp) =>
+      emp.idAcc === idAcc && emp.idEmp === idEmp && emp.idDepart === idDepart
+  );
+  if(indexDB == -1){
+    alert("Xóa không thành công");
+  }
+  allEmployees[indexDB].idDepart = "";
+  localStorage.setItem("employees", JSON.stringify(allEmployees));
+
+  display(getEmployeesDPM());
   document.getElementById("alert_delete").classList.add("hidden");
   document.getElementById("alert_delete").classList.remove("flex");
 }

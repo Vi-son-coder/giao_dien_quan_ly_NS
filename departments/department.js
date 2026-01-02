@@ -42,19 +42,19 @@ function addDepartments(e) {
   formAdd__departments.reset();
 }
 
-function display(Data = Departments) {
+function display(Departments) {
   departmentsList.innerHTML = "";
-  Data.forEach((user,index) => {
+  Departments.forEach((d,index) => {
     const tr = document.createElement("tr");
     let dem = 0;
     let Employees = allEmployees.filter(
-      (user) => user.idAcc === idAcc
+      (emp) => emp.idAcc === idAcc && emp.idDepart === d.idDepart
     );
     Employees.forEach(() => dem++);
     tr.innerHTML = `
         <td>${index + 1}</td>
-        <td>${user.idDepart}</td>
-        <td>${user.nameDepart}</td>
+        <td>${d.idDepart}</td>
+        <td>${d.nameDepart}</td>
         <td>${dem}</td>
         <td>
             <button class="btn  view">Xem</button>
@@ -65,14 +65,14 @@ function display(Data = Departments) {
     departmentsList.appendChild(tr);
 
     tr.querySelector(".btn.view").addEventListener("click", () => {
-      localStorage.setItem("idDepart", user.idDepart);
+      localStorage.setItem("idDepart", d.idDepart);
       window.location.href = `employeesDPM.html`; //?maDepart=${maDepart}`; Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
     });
     tr.querySelector(".btn.edit").addEventListener("click", () => {
-      fix__modal(user.idDepart);
+      fix__modal(d.idDepart);
     });
     tr.querySelector(".btn.delete").addEventListener("click", () => {
-      alert_delete(user.idDepart);
+      alert_delete(d.idDepart);
     });
   });
 }

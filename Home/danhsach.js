@@ -65,7 +65,8 @@ function TimKiem(){
       return;
     }
     else{
-      const result = allEmployees.filter(user => 
+      refresh__allEmployeesFilter(Employees);
+      const result = Employees.filter(user => 
       user.username.toLowerCase().includes(keyword) || user.idEmp.toLowerCase().includes(keyword) && user.idAcc === idAcc//sử dụng hàm includes(): để tìm chuỗi con trong chuỗi cha
     );
     display(result);
