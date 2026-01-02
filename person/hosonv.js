@@ -1,18 +1,24 @@
-let account = getCurrentAccount();
-let employees = account.employees;
+
 let Form__hsnv = document.querySelector(".form__hsnv");
 
 let userList = Form__hsnv.querySelector("#list");
 
-let rememberRow = null;
+let idAcc = localStorage.getItem("idUser");
 
-function display(Data = employees) {
+let allEmployees = JSON.parse(localStorage.getItem("employees"));
+
+let Employees = allEmployees.filter((user) => user.idAcc === idAcc);
+
+function refresh__allEmployeesFilter(Employees){
+  Employees = allEmployees.filter((user) => user.idAcc === idAcc);
+  display(Employees);
+}
+function display(Employees) {
   userList.innerHTML = "";
-  Data.forEach((user, index) => {
+  Employees.forEach((user) => {
     const tr = document.createElement("tr");
-    tr.dataset.index = index;
     tr.innerHTML = `
-    <td>${user.manv}</td>
+    <td>${user.idEmp}</td>
     <td>${user.username}</td>
     <td>${user.email}</td>
     <td>
@@ -24,30 +30,28 @@ function display(Data = employees) {
     `;
     userList.appendChild(tr);
     tr.querySelector("#Fix__btn").addEventListener("click", () => {
-      rememberRow = tr;
-      update__modal();
+      update__modal(user.idEmp);
     });
     tr.querySelector("#Xem").addEventListener("click", () => {
-      rememberRow = tr;
-      modal__view();
+      modal__view(user.idEmp);
     });
   });
 }
 
 window.addEventListener("load", () => {
-  display(employees);
+  refresh__allEmployeesFilter(Employees);
 });
 
 function Search() {
   let keyword = Form__hsnv.querySelector("#search").value.toLowerCase().trim();
 
   if (keyword == "") {
-    display(employees);
+    refresh__allEmployeesFilter(Employees);
   } else {
-    const result = employees.filter(
+    const result = allEmployees.filter(
       (user) =>
-        user.manv.toLowerCase().includes(keyword) ||
-        user.username.toLowerCase().includes(keyword)
+        user.idEmp.toLowerCase().includes(keyword) ||
+        user.username.toLowerCase().includes(keyword) && user.idAcc === idAcc
     );
     display(result);
   }
@@ -57,16 +61,18 @@ Form__hsnv.querySelector("#search").addEventListener("input", Search);
 Form__hsnv.querySelector("#search__btn").addEventListener("click",Search);
 Form__fixnv = document.getElementById("modal__fix");
 
-function update__modal() {
-  let index = rememberRow.dataset.index;
-  Form__fixnv.querySelector("#manvFix").value = employees[index].manv;
-  Form__fixnv.querySelector("#htFix").value = employees[index].username;
-  Form__fixnv.querySelector("#eFix").value = employees[index].email;
-  Form__fixnv.querySelector("#cvFix").value = employees[index].cv;
+function update__modal(idEmp) {
+  Form__fixnv.dataset.idEmp = idEmp;
+  let indexDB = allEmployees.findIndex((emp) => emp.idEmp === idEmp && emp.idAcc === idAcc);
+
+  Form__fixnv.querySelector("#manvFix").value = allEmployees[indexDB].idEmp;
+  Form__fixnv.querySelector("#htFix").value = allEmployees[indexDB].username;
+  Form__fixnv.querySelector("#eFix").value = allEmployees[indexDB].email;
+  Form__fixnv.querySelector("#cvFix").value = allEmployees[indexDB].cv;
   Form__fixnv.querySelector("#departmentsFix").value =
-    employees[index].Departments;
-  Form__fixnv.querySelector("#phone__numberFix").value = employees[index].SDT;
-  Form__fixnv.querySelector("#addressFix").value = employees[index].Address;
+    allEmployees[indexDB].Departments;
+  Form__fixnv.querySelector("#phone__numberFix").value = allEmployees[indexDB].SDT;
+  Form__fixnv.querySelector("#addressFix").value = allEmployees[indexDB].Address;
 
   Form__fixnv.classList.remove("hidden");
   Form__fixnv.classList.add("flex");
@@ -74,8 +80,10 @@ function update__modal() {
 
 function update(e) {
   e.preventDefault();
-  index = rememberRow.dataset.index;
-  let manvFix = Form__fixnv.querySelector("#manvFix").value;
+  let idEmp = Form__fixnv.dataset.idEmp;
+  let indexDB = allEmployees.findIndex((emp) => emp.idEmp === idEmp && emp.idAcc === idAcc);
+
+  let idEmpFix = Form__fixnv.querySelector("#manvFix").value;
   let usernameFix = Form__fixnv.querySelector("#htFix").value;
   let emailFix = Form__fixnv.querySelector("#eFix").value;
   let cvFix = Form__fixnv.querySelector("#cvFix").value;
@@ -84,7 +92,7 @@ function update(e) {
   let addressFix = Form__fixnv.querySelector("#addressFix").value;
 
   if (
-    manvFix == "" ||
+    idEmpFix == "" ||
     usernameFix == "" ||
     emailFix == "" ||
     cvFix == "" ||
@@ -94,15 +102,16 @@ function update(e) {
   ) {
     alert("Vui lòng nhập đầy đủ dữ liệu");
   } else {
-    employees[index].manv = manvFix;
-    employees[index].username = usernameFix;
-    employees[index].email = emailFix;
-    employees[index].cv = cvFix;
-    employees[index].Departments = DepartmentsFix;
-    employees[index].SDT = sdtFix;
-    employees[index].Address = addressFix;
-    display(employees);
-    saveAccount(account);
+    allEmployees[indexDB].idEmp = idEmpFix;
+    allEmployees[indexDB].username = usernameFix;
+    allEmployees[indexDB].email = emailFix;
+    allEmployees[indexDB].cv = cvFix;
+    allEmployees[indexDB].Departments = DepartmentsFix;
+    allEmployees[indexDB].SDT = sdtFix;
+    allEmployees[indexDB].Address = addressFix;
+    refresh__allEmployeesFilter(Employees);
+    localStorage.setItem("employees",JSON.stringify(allEmployees));
+
     document.getElementById("modal__fix").classList.add("hidden");
     document.getElementById("modal__fix").classList.remove("flex");
   }
@@ -115,16 +124,17 @@ function close__fix__btn() {
   document.getElementById("modal__fix").classList.remove("flex");
 }
 
-function modal__view(){
-   let index = rememberRow.dataset.index;
-  document.querySelector("#view_manv").value = employees[index].manv;
-  document.querySelector("#view_username").value = employees[index].username;
-  document.querySelector("#view_email").value = employees[index].email;
-  document.querySelector("#view_cv").value = employees[index].cv;
+function modal__view(idEmp){
+  let indexDB = allEmployees.findIndex((emp) => emp.idEmp === idEmp && emp.idAcc === idAcc);
+
+  document.querySelector("#view_manv").value = allEmployees[indexDB].idEmp;
+  document.querySelector("#view_username").value = allEmployees[indexDB].username;
+  document.querySelector("#view_email").value = allEmployees[indexDB].email;
+  document.querySelector("#view_cv").value = allEmployees[indexDB].cv;
   document.querySelector("#view_departments").value =
-    employees[index].Departments;
-  document.querySelector("#view_phone").value = employees[index].SDT;
-  document.querySelector("#view_address").value = employees[index].Address;
+    allEmployees[indexDB].Departments;
+  document.querySelector("#view_phone").value = allEmployees[indexDB].SDT;
+  document.querySelector("#view_address").value = allEmployees[indexDB].Address;
 
   document.getElementById("modal__view").classList.remove("hidden");
   document.getElementById("modal__view").classList.add("flex");

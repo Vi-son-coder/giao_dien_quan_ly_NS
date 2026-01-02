@@ -6,8 +6,8 @@ let params = new URLSearchParams(window.location.search); //URLSearchParams: x�
 // window.location.search: lấy chuỗi dữ liệu nằm trên URL
 let userList__Add = document.getElementById("listAdd");
 
-const employees = JSON.parse(localStorage.getItem("employees")) || [];
-
+const account = getCurrentAccount();
+const employees = account.employees;
 let rememberRow__Add = null;
 
 let maDepart = params.get("maDepart");

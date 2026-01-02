@@ -1,8 +1,16 @@
-const Departments = JSON.parse(localStorage.getItem("departments")) || [];
+const allDepartments = JSON.parse(localStorage.getItem("departments")) || []; //lấy tất cả departments của các tất cả các acc
+
+// Câu chốt CUỐI (rất quan trọng)
+// Email chỉ dùng làm key ở “object tổng” để chia account
+// Object con (emp, depart) là thực thể → KHÔNG dùng email
+
+const allEmployees = JSON.parse(localStorage.getItem("employees")) || [];
+
+const idAcc = localStorage.getItem("idUser");
+
+let Departments = allDepartments.filter((user) => user.idAcc === idAcc);
 
 const departmentsList = document.getElementById("list");
-
-let rememberRow = null;
 
 const formAdd__departments = document.getElementById("form__departments");
 
@@ -18,16 +26,16 @@ function close__add__btn() {
 }
 function addDepartments(e) {
   e.preventDefault();
-  let maDepart = formAdd__departments.querySelector("#code__departments").value;
+  let idDepart = formAdd__departments.querySelector("#code__departments").value;
   let nameDepart = formAdd__departments.querySelector("#nameDepartments").value;
-  if (maDepart == "" || nameDepart == "") {
+  if (idDepart == "" || nameDepart == "") {
     alert("Vui lòng nhập thông tin!");
     return;
   } else {
-    let employees = [];
-    Departments.push({ maDepart, nameDepart, employees });
-    localStorage.setItem("departments", JSON.stringify(Departments));
+    allDepartments.push({ idDepart, nameDepart, idAcc });
+    localStorage.setItem("departments", JSON.stringify(allDepartments));
   }
+  Departments = allDepartments.filter((user) => user.idAcc === idAcc);
   display(Departments);
   document.getElementById("modal__add").classList.add("hidden");
   document.getElementById("modal__add").classList.remove("flex");
@@ -40,10 +48,13 @@ function display(Data = Departments) {
     const tr = document.createElement("tr");
     tr.dataset.index = index;
     let dem = 0;
-    user.employees.forEach(() => dem++);
+    const Employees = allEmployees.filter(
+      (user) => user.idAcc === idAcc && user.idDepart === idDepart
+    );
+    Employees.forEach(() => dem++);
     tr.innerHTML = `
         <td>${index + 1}</td>
-        <td>${user.maDepart}</td>
+        <td>${user.idDepart}</td>
         <td>${user.nameDepart}</td>
         <td>${dem}</td>
         <td>
@@ -55,17 +66,14 @@ function display(Data = Departments) {
     departmentsList.appendChild(tr);
 
     tr.querySelector(".btn.view").addEventListener("click", () => {
-      rememberRow = tr;
-      let maDepart = user.maDepart;
-      window.location.href = `employeesDPM.html?maDepart=${maDepart}`; //Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
+      localStorage.setItem("idDepart", user.idDepart);
+      window.location.href = `employeesDPM.html`; //?maDepart=${maDepart}`; Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
     });
     tr.querySelector(".btn.edit").addEventListener("click", () => {
-      rememberRow = tr;
-      fix__modal(this);
+      fix__modal(user.idDepart);
     });
     tr.querySelector(".btn.delete").addEventListener("click", () => {
-      rememberRow = tr;
-      alert_delete(this);
+      alert_delete(user.idDepart);
     });
   });
 }
@@ -82,7 +90,7 @@ function Search() {
   } else {
     const result = Departments.filter(
       (user) =>
-        user.maDepart.toLowerCase().includes(keyword) ||
+        user.idDepart.toLowerCase().includes(keyword) ||
         user.nameDepart.toLowerCase().includes(keyword)
     );
     display(result);
@@ -95,19 +103,28 @@ window.addEventListener("load", () => {
   display(Departments);
 });
 
-function alert_delete() {
+function alert_delete(idDepart) {
   // rememberRow = btn.closest("tr"); closest: là 1 method(phương thức) của DOM Element dùng để tìm phần tử cha(selector) gần nhất, cú pháp: Element.closest(selector_cha)
   document.getElementById("alert_delete").classList.remove("hidden");
   document.getElementById("alert_delete").classList.add("flex");
+  document.getElementById("alert_delete").dataset.idDepart = idDepart;
 }
 
 function Delete() {
-  const index = rememberRow.dataset.index; //section(khối/phần của bảng như là "thead"...): là vị trí index của tr chỉ đếm trong section chứa nó
-  //rowIndex: đếm toàn bộ table
-  Departments.splice(index, 1);
-  localStorage.setItem("departments", JSON.stringify(Departments));
-  rememberRow = null;
+  let idDepart = document.getElementById("alert_delete").dataset.idDepart;
+  let indexDB = allDepartments.findIndex(
+    (d) => d.idAcc === idAcc && d.idDepart === idDepart
+  ); //tìm index trực tiếp trên data base chứ ko dùng index của view
+
+  if (indexDB !== -1) {
+    allDepartments.splice(indexDB, 1);
+    localStorage.setItem("departments", JSON.stringify(allDepartments));
+  }
+  Departments = allDepartments.filter((user) => user.idAcc === idAcc);
   display(Departments);
+
+  localStorage.removeItem("idDepart");
+
   document.getElementById("alert_delete").classList.add("hidden");
   document.getElementById("alert_delete").classList.remove("flex");
 }
@@ -119,34 +136,54 @@ function close__delete__btn() {
   document.getElementById("alert_delete").classList.remove("flex");
 }
 
-function fix__modal() {
+function fix__modal(idDepart) {
   document.getElementById("modal__fix").classList.remove("hidden");
   document.getElementById("modal__fix").classList.add("flex");
-  let index = rememberRow.dataset.index;
+
+  let indexDB = allDepartments.findIndex(
+    (d) => d.idAcc === idAcc && d.idDepart === idDepart
+  );
+
   document.getElementById("code__departments__Fix").value =
-    Departments[index].maDepart;
+    allDepartments[indexDB].idDepart;
   document.getElementById("nameDepartments__Fix").value =
-    Departments[index].nameDepart;
+    allDepartments[indexDB].nameDepart;
+  // Lưu tạm data của idDepart vào modal của html
+  document.getElementById("modal__fix").dataset.idDepart = idDepart;
+  //sẽ thành  = <div id="modal__fix" data-id-depart="PB01"></div>
+  //  Cái gì sống cùng UI → gắn vào UI (dataset)
+  //  Cái gì sống lâu → localStorage / DB
 }
+
 function Fix__Departments(e) {
-  let index = rememberRow.dataset.index;
+  let idDepart = document.getElementById("modal__fix").dataset.idDepart;
+
+  let indexDB = allDepartments.findIndex(
+    (d) => d.idAcc === idAcc && d.idDepart === idDepart
+  );
+
   e.preventDefault();
-  let maDepartFix = document.getElementById("code__departments__Fix").value;
+  let idDepartFix = document.getElementById("code__departments__Fix").value;
   let nameDepartFix = document.getElementById("nameDepartments__Fix").value;
-  if (maDepartFix == "" || nameDepartFix == "") {
+  if (idDepartFix == "" || nameDepartFix == "") {
     alert("Vui lòng nhập thông tin");
   } else {
-    Departments[index].maDepart = maDepartFix;
-    Departments[index].nameDepart = nameDepartFix;
-    localStorage.setItem("departments", JSON.stringify(Departments));
-    rememberRow = null;
-    document.getElementById("modal__fix").classList.add("hidden");
-    document.getElementById("modal__fix").classList.remove("flex");
-    display(Departments);
+    if (indexDB !== -1) {
+      allDepartments[indexDB].idDepart = idDepartFix;
+      allDepartments[indexDB].nameDepart = nameDepartFix;
+      localStorage.setItem("departments", JSON.stringify(allDepartments));
+      document.getElementById("modal__fix").classList.add("hidden");
+      document.getElementById("modal__fix").classList.remove("flex");
+      Departments = allDepartments.filter((d) => d.idAcc === idAcc);
+      display(Departments);
+      localStorage.removeItem("idDepart");
+    }
   }
 }
 function close__fix__btn() {
   document.getElementById("modal__fix").classList.add("hidden");
   document.getElementById("modal__fix").classList.remove("flex");
 }
-document.getElementById("form__departmentsFix").addEventListener("submit",Fix__Departments);
+document
+  .getElementById("form__departmentsFix")
+  .addEventListener("submit", Fix__Departments);
