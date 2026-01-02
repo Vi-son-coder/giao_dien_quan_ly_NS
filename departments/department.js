@@ -44,12 +44,11 @@ function addDepartments(e) {
 
 function display(Data = Departments) {
   departmentsList.innerHTML = "";
-  Data.forEach((user, index) => {
+  Data.forEach((user,index) => {
     const tr = document.createElement("tr");
-    tr.dataset.index = index;
     let dem = 0;
-    const Employees = allEmployees.filter(
-      (user) => user.idAcc === idAcc && user.idDepart === idDepart
+    let Employees = allEmployees.filter(
+      (user) => user.idAcc === idAcc
     );
     Employees.forEach(() => dem++);
     tr.innerHTML = `
@@ -91,7 +90,7 @@ function Search() {
     const result = Departments.filter(
       (user) =>
         user.idDepart.toLowerCase().includes(keyword) ||
-        user.nameDepart.toLowerCase().includes(keyword)
+        user.nameDepart.toLowerCase().includes(keyword) && user.idAcc === idAcc
     );
     display(result);
   }
