@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="login.css" />
     <title>Đăng nhập</title>
   </head>
-  <body>
+  <body data-page="login">
     <div class="login-wrap" role="main">
       <aside>
         <div class="logo">
@@ -27,15 +27,15 @@
         <form class="loginForm">
           <div class="input-group">
             <label for="Email">Email hoặc mã nhân sự</label>
-            <input type="text" id="TK" placeholder="ví dụ: nv001@gmail.com" />
+            <input type="text" id="Email" placeholder="ví dụ: nv001@gmail.com" />
           </div>
           <div class="input-group">
             <label for="password">Mật khẩu</label>
-            <input type="password" id="MK" placeholder="Mật khẩu" />
+            <input type="password" id="password" placeholder="Mật khẩu" />
           </div>
           <div class="row">
             <label for="remember">
-              <input type="checkbox" /> Ghi nhớ mật khẩu
+              <input type="checkbox" id="remember"/> Ghi nhớ mật khẩu
             </label>
             <a href="#" class="forgot">Quên mật khẩu?</a>
           </div>

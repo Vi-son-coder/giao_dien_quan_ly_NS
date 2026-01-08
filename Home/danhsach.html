@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="danhsach.css" />
     <title>Danh sách nhân viên</title>
   </head>
-  <body>
+  <body data-page="danhsach">
     <!--bảng nhân sự-->
     <div class="body_1">
       <aside class="side">
@@ -38,6 +38,7 @@
             <li><a href="#">Chấm công</a></li>
             <li><a href="#">Hợp đồng</a></li>
             <li><a href="#">Hồ sơ cá nhân</a></li>
+            <li><a id="logout">Đăng xuất</a></li>
           </ul>
         </nav>
       </aside>
@@ -141,8 +142,7 @@
         </button>
       </div>
     </div>
-    <script src="../login/auth.js" defer></script>
-    <script src="../login/storage.js" defer></script>
     <script src="./danhsach.js" defer></script>
+    <script src="../auth.js" defer></script>
   </body>
 </html>

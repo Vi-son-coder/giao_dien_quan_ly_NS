@@ -91,6 +91,7 @@ button{
 @media(max-width:720px){
     .login-wrap{
         flex-direction: column;
+        min-width: 376px;
     }
     aside{
         width: 100%;

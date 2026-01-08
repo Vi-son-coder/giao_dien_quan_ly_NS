@@ -43,16 +43,20 @@ function display(EmployeesDPM) {
         <td>${emp.email}</td>
         <td>
         <div class="action">
-          <button type="button" class="Delete-btn" id="delete__btn">Xóa</button>
+          <button type="button" class="Delete-btn" data-id-emp=${emp.idEmp}>Xóa</button>
         </div>
         </td>
         `;
     userList.appendChild(tr); //appendChild(): thêm con vào cuối của cha
-    tr.querySelector("#delete__btn").addEventListener("click", function () {
-      alert_delete(emp.idEmp);
-    });
   });
 }
+
+userList.addEventListener("click", (e) => {
+  let btn = e.target.closest(".Delete-btn");
+  if(!btn) return;
+  let idEmp = btn.dataset.idEmp;
+  alert_delete(idEmp);
+})
 
 function display__add(Employees) {
   userList__Add.innerHTML = "";

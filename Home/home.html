@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="home.css" />
     <title>Trang chủ</title>
   </head>
-  <body>
+  <body data-page="home">
     <aside class="side">
       <div class="logo">
         <img src="./logo-dai-hoc-cong-nghiep-ha-noi-5.webp" alt="" />
@@ -20,11 +20,13 @@
             <a>Quản lý nhân viên</a>
             <ul class="mc2">
               <li><a href="./danhsach.html">Danh sách nhân viên</a></li>
-              <li><a href="#">Hồ sơ nhân viên</a></li>
+              <li><a href="../person/hosonv.html">Hồ sơ nhân viên</a></li>
               <li><a href="#">Lưu nhân viên nghỉ</a></li>
             </ul>
           </li>
-          <li><a href="../departments/departments.html">Quản lý phòng ban</a></li>
+          <li>
+            <a href="../departments/departments.html">Quản lý phòng ban</a>
+          </li>
           <li>
             <a href="#">Nghỉ phép</a>
             <ul class="mc2">
@@ -36,6 +38,7 @@
           <li><a href="#">Chấm công</a></li>
           <li><a href="#">Hợp đồng</a></li>
           <li><a href="#">Hồ sơ cá nhân</a></li>
+          <li><a id="logout">Đăng xuất</a></li>
         </ul>
       </nav>
     </aside>
@@ -43,5 +46,9 @@
       <h1>Trang chủ</h1>
       <hr />
     </div>
+    <script>
+      let idAcc = localStorage.getItem("idUser");
+    </script>
+    <script src="../auth.js" defer></script>
   </body>
 </html>

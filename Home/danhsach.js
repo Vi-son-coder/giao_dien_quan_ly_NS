@@ -46,15 +46,19 @@ function display(Employees) {
     <td>${user.email}</td>
     <td>
         <div class="action">
-          <button type="button" class="Delete-btn" id="delete__btn">Xóa</button>
+          <button type="button" class="Delete-btn" id="delete__btn" data-id-emp="${user.idEmp}">Xóa</button>
         </div>
       </td>`; // ký hiệu $: là dấu hiệu nói với JS: “chỗ này là code, không phải chữ thường”, để chiền biến/biểu thức
     userList.appendChild(tr); //appendChild(): thêm con vào cuối của cha
-    tr.querySelector("#delete__btn").addEventListener("click", function () {
-      alert_delete(user.idEmp);
-    });
   });
 }
+userList.addEventListener("click",(e) => {
+  let btn = e.target.closest(".Delete-btn");
+  if(!btn) return;
+
+  let idEmp = btn.dataset.idEmp;
+  alert_delete(idEmp);
+})
 // tìm kiếm
 const seachInput = document.getElementById("search");
   
@@ -88,6 +92,11 @@ function addUser(e) {
   const SDT = form__newNV.querySelector("#phone__number").value.trim();
   const Address = form__newNV.querySelector("#address").value.trim();
   let idDepart = "";
+  let testId = allEmployees.find((emp) => emp.idEmp === idEmp && emp.idAcc === idAcc);
+  if(testId){
+    alert("Trùng id");
+    return;
+  }
   if (idEmp == "" || username == "" || email == "" || cv == "" || Departments == "" || SDT == "" || Address == "") {
     alert("Vui lòng nhập đầy đủ thông tin");
     return;

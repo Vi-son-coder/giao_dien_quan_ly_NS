@@ -28,6 +28,10 @@ function addDepartments(e) {
   e.preventDefault();
   let idDepart = formAdd__departments.querySelector("#code__departments").value;
   let nameDepart = formAdd__departments.querySelector("#nameDepartments").value;
+  let testId = allDepartments.find((d) => d.idEmp === idEmp && d.idAcc === idAcc);
+  if(testId){
+    alert("Trùng id");
+  }
   if (idDepart == "" || nameDepart == "") {
     alert("Vui lòng nhập thông tin!");
     return;
@@ -57,25 +61,36 @@ function display(Departments) {
         <td>${d.nameDepart}</td>
         <td>${dem}</td>
         <td>
-            <button class="btn  view">Xem</button>
-            <button class="btn edit">Sửa</button>
-            <button class="btn delete">Xóa</button>
+            <button class="btn  view" data-id-depart="${d.idDepart}">Xem</button>
+            <button class="btn edit" data-id-depart="${d.idDepart}">Sửa</button>
+            <button class="btn delete" data-id-depart="${d.idDepart}">Xóa</button>
         </td>
         `;
     departmentsList.appendChild(tr);
-
-    tr.querySelector(".btn.view").addEventListener("click", () => {
-      localStorage.setItem("idDepart", d.idDepart);
-      window.location.href = `employeesDPM.html`; //?maDepart=${maDepart}`; Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
-    });
-    tr.querySelector(".btn.edit").addEventListener("click", () => {
-      fix__modal(d.idDepart);
-    });
-    tr.querySelector(".btn.delete").addEventListener("click", () => {
-      alert_delete(d.idDepart);
-    });
   });
 }
+// sử dụng Event delegation(đoàn sự kiện): để tập trung xử lý sự kiện của 1 khối
+departmentsList.addEventListener("click",(d) => {
+
+  //dùng target: phần tử đang được click vào kết hợp với closest để lấy phần tử
+  let btn = d.target.closest(".btn");
+  if(!btn) return;
+  let idDepart = btn.dataset.idDepart;
+
+  //comtains(): hàm kiểm tra xem trong có chứa không != includes(): kiểm tra xem có chuỗi ký tự con hay không
+  if(btn.classList.contains("view")){
+    localStorage.setItem("idDepart",idDepart);
+      window.location.href = `employeesDPM.html`; //?maDepart=${maDepart}`; Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
+  }
+
+  if(btn.classList.contains("edit")){
+    fix__modal(idDepart);
+  }
+
+  if(btn.classList.contains("delete")){
+    alert_delete(idDepart);
+  }
+})
 
 document
   .getElementById("form__departments")

@@ -7,7 +7,6 @@
         localStorage.setItem("login", JSON.stringify(Login));
       }
 
-
       function DN() {
         let TK = document.getElementById("TK").value.trim();
         let MK = document.getElementById("MK").value.trim();

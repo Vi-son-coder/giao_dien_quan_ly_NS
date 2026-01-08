@@ -23,20 +23,30 @@ function display(Employees) {
     <td>${user.email}</td>
     <td>
       <div id="action">
-        <button id="Fix__btn" type="button">Sửa thông tin</button>
-        <button id="Xem" type="button">Xem chi tiết</button>
+        <button class="btn Fix__btn" type="button" data-id-emp="${user.idEmp}">Sửa thông tin</button>
+        <button class="btn Xem" type="button" data-id-emp="${user.idEmp}">Xem chi tiết</button>
       </div>
     </td>
     `;
     userList.appendChild(tr);
-    tr.querySelector("#Fix__btn").addEventListener("click", () => {
-      update__modal(user.idEmp);
-    });
-    tr.querySelector("#Xem").addEventListener("click", () => {
-      modal__view(user.idEmp);
-    });
   });
 }
+
+userList.addEventListener("click", (e) => {
+  let btn = e.target.closest(".btn");
+  if(!btn) return;
+
+  let idEmp = btn.dataset.idEmp;
+
+  if(btn.classList.contains("Fix__btn")){
+    console.log("fix");
+    update__modal(idEmp);
+  }
+  if(btn.classList.contains("Xem")){
+    console.log("xem");
+    modal__view(idEmp);
+  }
+})
 
 window.addEventListener("load", () => {
   refresh__allEmployeesFilter(Employees);
@@ -65,7 +75,6 @@ function update__modal(idEmp) {
   Form__fixnv.dataset.idEmp = idEmp;
   let indexDB = allEmployees.findIndex((emp) => emp.idEmp === idEmp && emp.idAcc === idAcc);
 
-  Form__fixnv.querySelector("#manvFix").value = allEmployees[indexDB].idEmp;
   Form__fixnv.querySelector("#htFix").value = allEmployees[indexDB].username;
   Form__fixnv.querySelector("#eFix").value = allEmployees[indexDB].email;
   Form__fixnv.querySelector("#cvFix").value = allEmployees[indexDB].cv;
@@ -83,7 +92,6 @@ function update(e) {
   let idEmp = Form__fixnv.dataset.idEmp;
   let indexDB = allEmployees.findIndex((emp) => emp.idEmp === idEmp && emp.idAcc === idAcc);
 
-  let idEmpFix = Form__fixnv.querySelector("#manvFix").value;
   let usernameFix = Form__fixnv.querySelector("#htFix").value;
   let emailFix = Form__fixnv.querySelector("#eFix").value;
   let cvFix = Form__fixnv.querySelector("#cvFix").value;
@@ -92,7 +100,6 @@ function update(e) {
   let addressFix = Form__fixnv.querySelector("#addressFix").value;
 
   if (
-    idEmpFix == "" ||
     usernameFix == "" ||
     emailFix == "" ||
     cvFix == "" ||
@@ -102,7 +109,6 @@ function update(e) {
   ) {
     alert("Vui lòng nhập đầy đủ dữ liệu");
   } else {
-    allEmployees[indexDB].idEmp = idEmpFix;
     allEmployees[indexDB].username = usernameFix;
     allEmployees[indexDB].email = emailFix;
     allEmployees[indexDB].cv = cvFix;

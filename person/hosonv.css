@@ -7,6 +7,7 @@ body {
   display: flex;
 }
 .form__hsnv {
+  margin-left: 220px;
   padding: 0 30px 0;
   width: 100%;
   overflow: auto;
@@ -23,26 +24,26 @@ input[type="text"] {
   border-radius: 5px;
   background-color: #f9f9f9;
 }
-.Search{
+.Search {
   display: flex;
   margin-top: 20px;
   width: 100%;
 }
-#search__btn{
+#search__btn {
   width: 100px;
   background-color: #f1f3f4;
   border: 1px solid rgba(0, 0, 0, 0.174);
 }
-#search__btn:hover{
+#search__btn:hover {
   cursor: pointer;
 }
-#search__btn:active{
+#search__btn:active {
   background-color: rgba(0, 0, 0, 0.189);
 }
 #tt {
   background-color: rgba(80, 154, 251, 0.871);
 }
-#table{
+#table {
   margin-top: 20px;
   border: 1px solid rgba(0, 0, 0, 0.156);
   border-collapse: collapse;
@@ -52,20 +53,20 @@ input[type="text"] {
 .table th {
   padding: 15px;
 }
-#Fix__btn {
+.Fix__btn {
   background-color: rgb(242, 234, 16);
   border: 0;
   border-radius: 3px;
   font-size: 20px;
   padding: 6px;
 }
-#Fix__btn:hover{
+.Fix__btn:hover {
   cursor: pointer;
 }
-#Fix__btn:active{
-background-color: rgba(242, 234, 16, 0.459);
+.Fix__btn:active {
+  background-color: rgba(242, 234, 16, 0.459);
 }
-#Xem{
+.Xem {
   background-color: rgb(16, 197, 242);
   border: 0;
   border-radius: 3px;
@@ -73,11 +74,11 @@ background-color: rgba(242, 234, 16, 0.459);
   padding: 6px;
   margin-left: 5px;
 }
-#Xem{
+.Xem {
   cursor: pointer;
 }
-#Xem:active{
-    background-color: rgba(16, 197, 242, 0.181);
+.Xem:active {
+  background-color: rgba(16, 197, 242, 0.181);
 }
 #list td {
   text-align: center;
@@ -86,7 +87,7 @@ background-color: rgba(242, 234, 16, 0.459);
   max-width: 172px;
   overflow-wrap: break-word;
 }
-#col__action{
+#col__action {
   width: calc(132.2px + 116.5px + 30px + 6px);
 }
 #action {
@@ -144,18 +145,18 @@ background-color: rgba(242, 234, 16, 0.459);
   border-radius: 5px;
   color: white;
 }
-#update:hover{
+#update:hover {
   cursor: pointer;
 }
 #update:active {
   background-color: rgb(4, 4, 136);
 }
-@keyframes hien{
-  from{
+@keyframes hien {
+  from {
     transform: scale(0.9);
     opacity: 0;
   }
-  to{
+  to {
     transform: scale(1);
     opacity: 1;
   }
@@ -185,31 +186,31 @@ background-color: rgba(242, 234, 16, 0.459);
 }
 
 /*form xem hồ sơ--------------------------------------------------------*/
- .form__viewNV {
-      background: #fff;
-      width: 420px;
-      max-width: 95%;
-      padding: 20px 24px;
-      border-radius: 8px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      animation: hien 0.3s ease;
-    }
-    .form__viewNV h2 {
-      text-align: center;
-      margin-bottom: 16px;
-      font-size: 20px;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 12px;
-    }
-    .form-group label {
-      font-size: 14px;
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
+.form__viewNV {
+  background: #fff;
+  width: 420px;
+  max-width: 95%;
+  padding: 20px 24px;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: hien 0.3s ease;
+}
+.form__viewNV h2 {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
 .form-group textarea {
   padding: 2.5px;
   font-size: 20px;
