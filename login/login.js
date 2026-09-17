@@ -8,8 +8,10 @@
       }
 
       function DN() {
-        let TK = document.getElementById("TK").value.trim();
-        let MK = document.getElementById("MK").value.trim();
+        let TK = document.getElementById("Email").value.trim();
+        let MK = document.getElementById("password").value.trim();
+        
+        // thay thế backend
         let Account = JSON.parse(localStorage.getItem("login")) || [];
         let test = Account.find(
           (user) => user.email === TK && user.pass === MK

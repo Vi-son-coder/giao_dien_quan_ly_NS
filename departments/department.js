@@ -28,7 +28,7 @@ function addDepartments(e) {
   e.preventDefault();
   let idDepart = formAdd__departments.querySelector("#code__departments").value;
   let nameDepart = formAdd__departments.querySelector("#nameDepartments").value;
-  let testId = allDepartments.find((d) => d.idEmp === idEmp && d.idAcc === idAcc);
+  let testId = allDepartments.find((d) => d.idDepart === idDepart && d.idAcc === idAcc);
   if(testId){
     alert("Trùng id");
   }
@@ -69,6 +69,7 @@ function display(Departments) {
     departmentsList.appendChild(tr);
   });
 }
+
 // sử dụng Event delegation(đoàn sự kiện): để tập trung xử lý sự kiện của 1 khối
 departmentsList.addEventListener("click",(d) => {
 
@@ -80,7 +81,7 @@ departmentsList.addEventListener("click",(d) => {
   //comtains(): hàm kiểm tra xem trong có chứa không != includes(): kiểm tra xem có chuỗi ký tự con hay không
   if(btn.classList.contains("view")){
     localStorage.setItem("idDepart",idDepart);
-      window.location.href = `employeesDPM.html`; //?maDepart=${maDepart}`; Tạo 1 liên kết chứa dữ liệu khi click vào(Dữ liệu là phần nằm sau dấu ? )
+      window.location.href = `employeesDPM.html`;
   }
 
   if(btn.classList.contains("edit")){

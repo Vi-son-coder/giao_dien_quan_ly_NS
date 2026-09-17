@@ -1,8 +1,11 @@
 let page = document.body.dataset.page;
 // clean code thay vì gọi DOM lung tung thì mỗi html sẽ tự khai báo nó là ai và js đọc lại
+let id = Number(idAcc);
+
+let invalidUser = !idAcc || Number.isNaN(id);
 
 /*==========AUTH CHECK============== */
-if (page !== "login" && !idAcc) {
+if (page !== "login" && invalidUser) {
   window.location.replace("/login/login.html");
 }
 
